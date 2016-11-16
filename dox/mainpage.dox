@@ -1,0 +1,193 @@
+/*! \mainpage
+
+\tableofcontents
+
+\section main_desc_sec Description
+
+BPPrint is a small wrapper around the common C string formatting functions.
+It adds some helpful compile-time and run-time checks, as well as
+a few nice features.
+
+\section main_building_sec Building & Testing
+
+The BPPrint project is configured and built
+using CMake (https://cmake.org).
+
+
+\subsection building_dependencies Dependencies
+
+The only dependencies are a C++ compiler (and standard libraries)
+capable of compiling C++11 (in particular, variadic templates)
+and CMake (v3.0.2 or above).
+
+\subsection building_instructions Building
+
+The basic building steps are the traditional CMake steps:
+
+\code{.sh}
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/path/to/install ../ 
+make
+make test
+make install
+\endcode
+
+
+\subsection building_testing Testing & Benchmarking
+
+Testing is done with `make test.`
+
+
+\subsection building_installing Installation & Including in Other Projects
+
+`make install` will install the headers and library. It will also install a CMake configuration
+file that can be used to include BPPrint in other projects. This creates a CMake interface
+target that can be used with `target_link_libraries`. The top-level install path
+(what was passed to `CMAKE_INSTALL_PREFIX`) must be in your `CMAKE_PREFIX_PATH` (or
+be one of the system defaults).
+
+\code{.unparsed}
+
+# Make sure that the top-level install path is in the CMAKE_PREFIX_PATH
+find_package(bpprint)  
+
+# Later, link to it. This will also pull in header paths
+target_link_libraries(myproject bpprint).
+\endcode
+
+Note that your project must be built with (at least) C++11 support.
+
+
+
+
+
+\section main_using_sec Using
+
+There are two main funtions provided by BPPrint that you would use.
+Both are declared in `<bpprint/Format.hpp>`. The first
+is `format_string()`, which returns an `std::string` with the
+new, formatted string. The second in `format_stream`, which outputs
+the results to a C++ ostream.
+
+The arguments to either of these functions are similar to the
+`printf` family of functions in C, and almost all features
+are supported.
+
+
+\code{.cpp}
+#include <bpprint/Format.hpp>
+#include <iostream>
+
+
+int main(void)
+{
+    std::string newstr = bpprint::format_string("This is a string: %s", "Hello");
+    bpprint::format_stream(std::cout, "This is a string: %s", "Hello");
+
+    double d = 10.1;
+    std::cout << bpprint::format_string("Floating point: %12.8e  at address %p\n", d, &d);
+
+    // std::string is supported
+    std::string mystr = "This is an std::string";    
+    std::cout << bpprint::format_string("A C++ string: %s\n", mystr);
+
+    return 0;
+}
+\endcode
+
+
+The correct type specifier can be automatically determined via the `?` specifier.
+In addition, 
+
+\code{.cpp}
+#include <bpprint/Format.hpp>
+#include <iostream>
+
+
+int main(void)
+{
+    double d = 10.1;
+    std::string mystr = "This is an std::string";    
+
+    bpprint::format_stream(std::cout, "Print this: %?\n", "Hello");
+    bpprint::format_stream(std::cout, "Print this: %?\n", 5);
+    bpprint::format_stream(std::cout, "Print this: %?\n", 10.2);
+    bpprint::format_stream(std::cout, "Print this: %?\n", d);
+    bpprint::format_stream(std::cout, "Print this: %?\n", &d);
+    bpprint::format_stream(std::cout, "Print this: %?\n", mystr);
+    
+    return 0;
+}
+\endcode
+
+
+If there is an error (bad substitution, etc) an `std::runtime_error` exception
+is thrown with a description of the problem.
+
+
+\code{.cpp}
+#include <bpprint/Format.hpp>
+#include <iostream>
+
+
+int main(void)
+{
+    double d = 10.1;
+    std::string mystr = "This is an std::string";    
+
+    try {
+        // will throw
+        bpprint::format_stream(std::cout, "Print this: %s\n", 5);
+    }
+    catch(std::exception & ex)
+    {
+        std::cout << "Exception: " << ex.what() << "\n";
+    }
+    
+    return 0;
+}
+\endcode
+
+
+
+\subsection main_limit_sec Limitations
+
+BPPrint does not support reordering of arguments. It also does not (yet)
+support wide characters or any string other than the basic `std::string`.
+
+
+\section main_license_sec License
+
+Copyright (c) 2016, Benjamin Pritchard \<ben@bennyp.org\>
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+1. Redistributions of source code must retain the above copyright notice,
+this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED
+TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+*/
