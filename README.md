@@ -9,9 +9,9 @@ The main documentation is found at https://www.bennyp.org/programming/bpprint
 
 ## General Features
 
-**BPHash** can be used to hash:
+**BPPrint** features include:
 
-- Compile-time check (makes sure object is valid)
+- Compile-time checking (makes sure object can be printed)
 - Run-time check (to see if format type specifier matches the type given)
 - Question-mark specifier allows for auto-detect
 - Allows passing of std::string
