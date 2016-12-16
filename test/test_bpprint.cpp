@@ -1,6 +1,11 @@
 #include <bpprint/Format.hpp>
 #include <iostream>
 
+#if defined(__clang__)
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wformat-security"
+#endif
+
 
 template<typename... Targs>
 void test_string(const std::string & fmt, Targs... args)
@@ -30,7 +35,7 @@ void test_format(const std::string & fmt, Targs &&... args)
     test_string(std::string("\t") + fmt, args...);
 
     // tests the border between stack and heap allocation
-    for(int i = 250; i < 260; i++)
+    for(unsigned int i = 250; i < 260; i++)
         test_string(std::string(i, '@') + fmt, args...);
 }
 

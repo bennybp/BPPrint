@@ -79,7 +79,7 @@ void handle_fmt_single_(std::string & fmt, T subst)
     {
         const int neededsize = n+1; // includes null termination
 
-        char * hbuf = new char[neededsize];
+        char * hbuf = new char[static_cast<size_t>(neededsize)];
 
         const int n2 = snprintf(hbuf, static_cast<size_t>(neededsize),
                                 fmt.c_str(), subst);
