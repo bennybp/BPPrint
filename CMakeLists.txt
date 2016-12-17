@@ -61,4 +61,4 @@ add_subdirectory(test)
 
 # Create and install the config file
 configure_file("bpprintConfig.cmake.in" "bpprintConfig.cmake" @ONLY)
-install(FILES ${CMAKE_BINARY_DIR}/bpprintConfig.cmake DESTINATION lib/cmake/bpprint) 
+install(FILES ${CMAKE_BINARY_DIR}/bpprintConfig.cmake DESTINATION share/cmake/bpprint) 
