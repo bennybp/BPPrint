@@ -2,6 +2,7 @@
 #include <cstring>
 #include <stdexcept>
 #include <typeinfo>
+#include <memory>
 
 #include "bpprint/Printf_wrap.hpp"
 
@@ -79,16 +80,15 @@ void handle_fmt_single_(std::string & fmt, T subst)
     {
         const int neededsize = n+1; // includes null termination
 
-        char * hbuf = new char[static_cast<size_t>(neededsize)];
+        std::unique_ptr<char> hbuf(new char[static_cast<size_t>(neededsize)]);
+        char * hbufp = hbuf.get();
 
-        const int n2 = snprintf(hbuf, static_cast<size_t>(neededsize),
+        const int n2 = snprintf(hbufp, static_cast<size_t>(neededsize),
                                 fmt.c_str(), subst);
 
         // these two conditions signal success
         if(n2 >= 0 && n2 < neededsize)
-            fmt = std::string(hbuf); // copies to the output
-
-        delete [] hbuf;
+            fmt = std::string(hbufp); // copies to the output
 
         if(n2 < 0 || n2 >= neededsize)
             throw std::runtime_error(std::string("Error here: ") +

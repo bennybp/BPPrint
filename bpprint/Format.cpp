@@ -114,7 +114,7 @@ bool get_next_format_(FormatInfo & fi, const std::string & str)
     fi.format = str.substr(fmt_begin, length_begin-fmt_begin);
 
     // length
-    memset(fi.length, 0, 3);
+    memset(fi.length, 0, 3*sizeof(char));
     memcpy(fi.length, str.c_str()+length_begin, length_len);
 
 
