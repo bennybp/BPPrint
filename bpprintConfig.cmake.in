@@ -1,12 +1,5 @@
 @PACKAGE_INIT@
 
-set(PN bpprint)
-
-set (_valid_components
-    static
-    shared
-)
-
 # Location of includes
 set(bpprint_INCLUDE_DIR "${PACKAGE_PREFIX_DIR}/@CMAKE_INSTALL_INCLUDEDIR@")
 set(bpprint_INCLUDE_DIRS ${bpprint_INCLUDE_DIR})
