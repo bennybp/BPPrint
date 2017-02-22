@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 3.1.3)
 project(BPPrint CXX)
+set(bpprint_VERSION 1.1)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_EXTENSIONS False)
+
+# For standard install paths (CMAKE_INSTALL_*DIR)
+include(GNUInstallDirs)
 
 # CMake doesn't support Intel CXX standard until cmake 3.6
 if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
@@ -46,7 +50,27 @@ add_subdirectory(bpprint)
 # Directory with some tests
 add_subdirectory(test)
 
+####################################
+# Exporting the CMake configuration
+####################################
+include(CMakePackageConfigHelpers)
 
-# Create and install the config file
-configure_file("bpprintConfig.cmake.in" "bpprintConfig.cmake" @ONLY)
-install(FILES ${CMAKE_BINARY_DIR}/bpprintConfig.cmake DESTINATION share/cmake/bpprint) 
+configure_package_config_file(bpprintConfig.cmake.in
+                              ${CMAKE_CURRENT_BINARY_DIR}/bpprintConfig.cmake
+                              INSTALL_DESTINATION share/cmake/bpprint
+)
+
+write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/bpprintConfigVersion.cmake
+                                 VERSION ${bpprint_VERSION}
+                                 COMPATIBILITY AnyNewerVersion
+)
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/bpprintConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/bpprintConfigVersion.cmake
+        DESTINATION share/cmake/bpprint
+)
+
+install(EXPORT bpprintTargets
+        NAMESPACE bpprint::
+        DESTINATION share/cmake/bpprint
+)

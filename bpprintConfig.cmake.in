@@ -1,23 +1,31 @@
-# Path to this file and the parent directories
-set(BPPRINT_CONFIG_PATH ${CMAKE_CURRENT_LIST_DIR})
-get_filename_component(BPPRINT_PREFIX_PATH ${BPPRINT_CONFIG_PATH} DIRECTORY)
-get_filename_component(BPPRINT_PREFIX_PATH ${BPPRINT_PREFIX_PATH} DIRECTORY)
-get_filename_component(BPPRINT_PREFIX_PATH ${BPPRINT_PREFIX_PATH} DIRECTORY)
+@PACKAGE_INIT@
 
+set(PN bpprint)
 
-# The bpprint library we want to link to
-find_library(BPPRINT_LIBRARY
-             NAMES bpprint
-             PATHS ${BPPRINT_PREFIX_PATH}/lib
-             NO_DEFAULT_PATH)
+set (_valid_components
+    static
+    shared
+)
 
-# The include directory
-find_path(BPPRINT_INCLUDE_PATH
-          NAMES bpprint/Format.hpp
-          PATHS ${BPPRINT_PREFIX_PATH}/include
-          NO_DEFAULT_PATH)
+# Location of includes
+set(bpprint_INCLUDE_DIR "${PACKAGE_PREFIX_DIR}/@CMAKE_INSTALL_INCLUDEDIR@")
+set(bpprint_INCLUDE_DIRS ${bpprint_INCLUDE_DIR})
 
-# This interface library
-add_library(bpprint INTERFACE)
-target_include_directories(bpprint INTERFACE ${BPPRINT_INCLUDE_PATH})
-target_link_libraries(bpprint INTERFACE ${BPPRINT_LIBRARY})
+# Location of libraries
+if(@BUILD_SHARED_LIBS@)
+    set(bpprint_LIBRARY "${PACKAGE_PREFIX_DIR}/@CMAKE_INSTALL_LIBDIR@/libbpprint${CMAKE_SHARED_LIBRARY_SUFFIX}")
+    set(bpprint_shared_FOUND 1)
+else()
+    set(bpprint_LIBRARY "${PACKAGE_PREFIX_DIR}/@CMAKE_INSTALL_LIBDIR@/libbpprint${CMAKE_STATIC_LIBRARY_SUFFIX}")
+    set(bpprint_static_FOUND 1)
+endif()
+set(bpprint_LIBRARIES ${bpprint_LIBRARY})
+
+check_required_components(bpprint)
+
+# Don't include targets if this file is being picked up by another
+# project which has already built this as a subproject
+if(NOT TARGET bpprint::bpprint)
+    include("${CMAKE_CURRENT_LIST_DIR}/bpprintTargets.cmake")
+endif()
+

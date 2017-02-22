@@ -8,9 +8,11 @@ target_include_directories(bpprint PRIVATE ${CMAKE_SOURCE_DIR})
 
 # Where to install the library
 install(TARGETS bpprint
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib)
+        EXPORT bpprintTargets
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 # Install the headers
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION include FILES_MATCHING PATTERN "*.hpp")
-
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+        FILES_MATCHING PATTERN "*.hpp")
