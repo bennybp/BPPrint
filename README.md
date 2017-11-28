@@ -4,8 +4,7 @@
 It adds a few nice features, as well as some compile-time and run-time
 checking of format arguments.
 
-The main documentation is found at https://www.bennyp.org/programming/bpprint
-
+The main documentation is found at https://bennybp.github.io/BPPrint/
 
 ## General Features
 
