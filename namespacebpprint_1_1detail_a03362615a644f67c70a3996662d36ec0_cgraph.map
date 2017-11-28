@@ -1,0 +1,6 @@
+<map id="bpprint::detail::format_" name="bpprint::detail::format_">
+<area shape="rect" id="node2" href="$namespacebpprint_1_1detail.html#a00550a2e56a3a026ac9bff111abdf6bf" title="Get the next format specification. " alt="" coords="442,5,569,47"/>
+<area shape="rect" id="node3" href="$namespacebpprint_1_1detail.html#a168aa4bcbf18c2234d6873a070df43c7" title="Prepare and check a decomposed format. " alt="" coords="205,95,384,122"/>
+<area shape="rect" id="node5" href="$namespacebpprint_1_1detail.html#ae4bc03101b632a8cfc45c72ad8e4c1f9" title="Format a string into an ostream. " alt="" coords="219,45,371,71"/>
+<area shape="rect" id="node4" href="$namespacebpprint_1_1detail.html#af20cffe54bcbd1e5840d485ffabafaf6" title="Handles substitution of a single specifier. " alt="" coords="432,88,579,129"/>
+</map>

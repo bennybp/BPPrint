@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$structbpprint_1_1detail_1_1_valid_printf_arg_3_01char_01_5_01_4.html" title="bpprint::detail::ValidPrintf\lArg\&lt; char * \&gt;" alt="" coords="129,5,297,47"/>
+<area shape="rect" id="node3" href="$structbpprint_1_1detail_1_1_valid_printf_arg_3_01const_01char_01_5_01_4.html" title="bpprint::detail::ValidPrintf\lArg\&lt; const char * \&gt;" alt="" coords="129,71,297,112"/>
+<area shape="rect" id="node4" href="$structbpprint_1_1detail_1_1_valid_printf_arg_3_01std_1_1string_01_4.html" title="bpprint::detail::ValidPrintf\lArg\&lt; std::string \&gt;" alt="" coords="129,136,297,177"/>
+<area shape="rect" id="node5" href="$structbpprint_1_1detail_1_1_valid_printf_arg_3_01_t_01_5_01_4.html" title="bpprint::detail::ValidPrintf\lArg\&lt; T * \&gt;" alt="" coords="129,201,297,243"/>
+</map>

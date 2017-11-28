@@ -1,0 +1,7 @@
+<map id="test_format" name="test_format">
+<area shape="rect" id="node2" href="$test__bpprint_8cpp.html#afbb78a214ecaa4c5c60733f2a3934cdf" title="test_string" alt="" coords="141,13,224,39"/>
+<area shape="rect" id="node3" href="$namespacebpprint.html#a431b0b3bfd8d5f6e2b83de1d5636414b" title="bpprint::format_string" alt="" coords="272,13,417,39"/>
+<area shape="rect" id="node4" href="$namespacebpprint.html#ade65289bfac4cd1f9281b9eb8a5888e1" title="bpprint::format_stream" alt="" coords="465,13,619,39"/>
+<area shape="rect" id="node5" href="$namespacebpprint_1_1detail.html#ae4bc03101b632a8cfc45c72ad8e4c1f9" title="Format a string into an ostream. " alt="" coords="667,13,819,39"/>
+<area shape="rect" id="node6" href="$namespacebpprint_1_1detail.html#a00550a2e56a3a026ac9bff111abdf6bf" title="Get the next format specification. " alt="" coords="867,5,993,47"/>
+</map>
